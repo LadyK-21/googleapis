@@ -215,7 +215,7 @@ http_archive(
     urls = ["https://github.com/googleapis/rules_gapic/archive/v%s.tar.gz" % _rules_gapic_version],
 )
 
-_gapic_generator_go_version = "0.51.1"
+_gapic_generator_go_version = "0.52.0"
 
 http_archive(
     name = "com_googleapis_gapic_generator_go",
@@ -255,7 +255,7 @@ rules_gapic_repositories()
 
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-_gapic_generator_java_version = "2.55.1"
+_gapic_generator_java_version = "2.56.3"
 
 http_archive(
     name = "gapic_generator_java",
@@ -314,9 +314,9 @@ load("@rules_gapic//python:py_gapic_repositories.bzl", "py_gapic_repositories")
 
 py_gapic_repositories()
 
-_gapic_generator_python_version = "1.23.6"
+_gapic_generator_python_version = "1.25.0"
 
-_gapic_generator_python_sha256 = "920596891917f95ecd81783f4a6569fc57892ff39b9b7da7e01844b3f2c9b00d"
+_gapic_generator_python_sha256 = "29a395fd13e9eef6a52006745c301b2c420dde2269e3dca2baa81132092344dd"
 
 http_archive(
     name = "gapic_generator_python",
@@ -353,9 +353,9 @@ gapic_generator_register_toolchains()
 # TypeScript
 ##############################################################################
 
-_gapic_generator_typescript_version = "4.8.2"
+_gapic_generator_typescript_version = "4.9.0"
 
-_gapic_generator_typescript_sha256 = "ff609ae012007dd103136d44185125cef87bd9ea0792643e465b402a2e21dbbf"
+_gapic_generator_typescript_sha256 = "223fcf700ff27ab156b969f79ac802178a5fec73a9c09c603fa022ef998193df"
 
 ### TypeScript generator
 http_archive(
@@ -365,13 +365,9 @@ http_archive(
     urls = ["https://github.com/googleapis/gapic-generator-typescript/archive/v%s.tar.gz" % _gapic_generator_typescript_version],
 )
 
-load("@gapic_generator_typescript//:repositories.bzl", "NODE_VERSION", "gapic_generator_typescript_repositories")
+load("@gapic_generator_typescript//:repositories.bzl", "gapic_generator_typescript_repositories")
 
 gapic_generator_typescript_repositories()
-
-load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
-
-rules_js_dependencies()
 
 load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies")
 
@@ -379,26 +375,28 @@ rules_ts_dependencies(
     ts_version_from = "@gapic_generator_typescript//:package.json",
 )
 
-load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
+load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
 
-nodejs_register_toolchains(
-    name = "nodejs",
-    node_version = NODE_VERSION,
-)
+rules_js_dependencies()
 
-load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock", "pnpm_repository")
+load("@aspect_rules_js//js:toolchains.bzl", "DEFAULT_NODE_VERSION", "rules_js_register_toolchains")
+
+rules_js_register_toolchains(node_version = DEFAULT_NODE_VERSION)
+
+load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock", "pnpm_repository")
 
 npm_translate_lock(
     name = "npm",
     data = ["@gapic_generator_typescript//:package.json"],
     pnpm_lock = "@gapic_generator_typescript//:pnpm-lock.yaml",
+    update_pnpm_lock = True,
 )
+
+pnpm_repository(name = "pnpm")
 
 load("@npm//:repositories.bzl", "npm_repositories")
 
 npm_repositories()
-
-pnpm_repository(name = "pnpm")
 
 ##############################################################################
 # PHP
@@ -457,9 +455,9 @@ gapic_generator_csharp_repositories()
 # Ruby
 ##############################################################################
 
-_gapic_generator_ruby_version = "v0.42.1"
+_gapic_generator_ruby_version = "v0.45.1"
 
-_gapic_generator_ruby_sha256 = "278b9ed55942df631fd444ce570dfd35c8d3712a25d9717bbe99afc531d6d4e8"
+_gapic_generator_ruby_sha256 = "a1afab1d286df6077f68ce2690583765376fce0aa57b1a08605bfa708b413b62"
 
 http_archive(
     name = "gapic_generator_ruby",

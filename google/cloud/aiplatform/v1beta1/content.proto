@@ -49,8 +49,9 @@ enum HarmCategory {
   // The harm category is sexually explicit content.
   HARM_CATEGORY_SEXUALLY_EXPLICIT = 4;
 
+  // Deprecated: Election filter is not longer supported.
   // The harm category is civic integrity.
-  HARM_CATEGORY_CIVIC_INTEGRITY = 5;
+  HARM_CATEGORY_CIVIC_INTEGRITY = 5 [deprecated = true];
 }
 
 // Content Part modality
@@ -236,6 +237,13 @@ message GenerationConfig {
     }
   }
 
+  // Config for thinking features.
+  message ThinkingConfig {
+    // Optional. Indicates the thinking budget in tokens.
+    // This is only applied when enable_thinking is true.
+    optional int32 thinking_budget = 3 [(google.api.field_behavior) = OPTIONAL];
+  }
+
   // Config for model selection.
   message ModelConfig {
     // Options for feature selection preference.
@@ -358,6 +366,11 @@ message GenerationConfig {
   // Optional. The speech generation config.
   optional SpeechConfig speech_config = 23
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Config for thinking features.
+  // An error will be returned if this field is set for models that don't
+  // support thinking.
+  ThinkingConfig thinking_config = 25 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Config for model selection.
   ModelConfig model_config = 27 [(google.api.field_behavior) = OPTIONAL];
