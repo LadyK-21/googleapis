@@ -1,7 +1,7 @@
 type: google.api.Service
 config_version: 3
 name: retail.googleapis.com
-title: Vertex AI Search for Retail API
+title: Vertex AI Search for commerce API
 
 apis:
 - name: google.cloud.location.Locations
@@ -10,6 +10,7 @@ apis:
 - name: google.cloud.retail.v2alpha.CatalogService
 - name: google.cloud.retail.v2alpha.CompletionService
 - name: google.cloud.retail.v2alpha.ControlService
+- name: google.cloud.retail.v2alpha.ConversationalSearchService
 - name: google.cloud.retail.v2alpha.GenerativeQuestionService
 - name: google.cloud.retail.v2alpha.MerchantCenterAccountLinkService
 - name: google.cloud.retail.v2alpha.ModelService
@@ -60,7 +61,7 @@ types:
 
 documentation:
   summary: |-
-    Vertex AI Search for Retail API is made up of Retail Search, Browse and
+    Vertex AI Search for commerce API is made up of Retail Search, Browse and
     Recommendations. These discovery AI solutions help you implement
     personalized search, browse and recommendations, based on machine learning
     models, across your websites and mobile applications.
@@ -121,6 +122,10 @@ authentication:
       canonical_scopes: |-
         https://www.googleapis.com/auth/cloud-platform
   - selector: 'google.cloud.retail.v2alpha.ControlService.*'
+    oauth:
+      canonical_scopes: |-
+        https://www.googleapis.com/auth/cloud-platform
+  - selector: google.cloud.retail.v2alpha.ConversationalSearchService.ConversationalSearch
     oauth:
       canonical_scopes: |-
         https://www.googleapis.com/auth/cloud-platform
