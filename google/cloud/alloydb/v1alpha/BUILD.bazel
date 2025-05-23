@@ -25,6 +25,7 @@ proto_library(
     name = "alloydb_proto",
     srcs = [
         "csql_resources.proto",
+        "csql_service.proto",
         "data_model.proto",
         "gemini.proto",
         "resources.proto",
@@ -108,6 +109,8 @@ java_gapic_test(
     test_classes = [
         "com.google.cloud.alloydb.v1alpha.AlloyDBAdminClientHttpJsonTest",
         "com.google.cloud.alloydb.v1alpha.AlloyDBAdminClientTest",
+        "com.google.cloud.alloydb.v1alpha.AlloyDBCSQLAdminClientHttpJsonTest",
+        "com.google.cloud.alloydb.v1alpha.AlloyDBCSQLAdminClientTest",
     ],
     runtime_deps = [":alloydb_java_gapic_test"],
 )
@@ -322,6 +325,7 @@ ruby_cloud_gapic_library(
     extra_protoc_parameters = [
         "ruby-cloud-gem-name=google-cloud-alloy_db-v1alpha",
         "ruby-cloud-gem-namespace=Google::Cloud::AlloyDB::V1alpha",
+        "ruby-cloud-service-override=AlloyDBCSQLAdmin=AlloyDBCloudSQLAdmin",
     ],
     grpc_service_config = "alloydb_v1alpha_grpc_service_config.json",
     rest_numeric_enums = True,

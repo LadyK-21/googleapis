@@ -28,7 +28,7 @@ option csharp_namespace = "Google.Cloud.Chronicle.V1";
 option go_package = "cloud.google.com/go/chronicle/apiv1/chroniclepb;chroniclepb";
 option java_multiple_files = true;
 option java_outer_classname = "EntityProto";
-option java_package = "google.cloud.chronicle.v1";
+option java_package = "com.google.cloud.chronicle.v1";
 option php_namespace = "Google\\Cloud\\Chronicle\\V1";
 option ruby_package = "Google::Cloud::Chronicle::V1";
 
@@ -127,7 +127,7 @@ message Watchlist {
   // Optional. Description of the watchlist.
   string description = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. Weight applied to the risk_score for entities
+  // Optional. Weight applied to the risk score for entities
   // in this watchlist.
   // The default is 1.0 if it is not specified.
   float multiplying_factor = 5 [(google.api.field_behavior) = OPTIONAL];

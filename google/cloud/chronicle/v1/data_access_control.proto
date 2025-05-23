@@ -28,7 +28,7 @@ option csharp_namespace = "Google.Cloud.Chronicle.V1";
 option go_package = "cloud.google.com/go/chronicle/apiv1/chroniclepb;chroniclepb";
 option java_multiple_files = true;
 option java_outer_classname = "DataAccessProto";
-option java_package = "google.cloud.chronicle.v1";
+option java_package = "com.google.cloud.chronicle.v1";
 option php_namespace = "Google\\Cloud\\Chronicle\\V1";
 option ruby_package = "Google::Cloud::Chronicle::V1";
 
@@ -372,13 +372,10 @@ message DataAccessLabel {
     string udm_query = 3;
   }
 
-  // Required. The unique resource name of the data access label.
-  string name = 1 [
-    (google.api.field_behavior) = REQUIRED,
-    (google.api.resource_reference) = {
-      type: "chronicle.googleapis.com/DataAccessLabel"
-    }
-  ];
+  // The unique resource name of the data access label.
+  string name = 1 [(google.api.resource_reference) = {
+    type: "chronicle.googleapis.com/DataAccessLabel"
+  }];
 
   // Output only. The short name displayed for the label as it appears on event
   // data.
